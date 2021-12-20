@@ -45,7 +45,7 @@ jobs:
         mkdir build-armeabi-v7a && cd build-armeabi-v7a
         cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_HOME/ndk-bundle/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI="armeabi-v7a" -DANDROID_ARM_NEON=ON -DANDROID_PLATFORM=android-21 -DANDROID_CPP_FEATURES="no-rtti no-exceptions" \
-            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv4_cmake_options.txt` -DBUILD_opencv_world=OFF -DOPENCV_DISABLE_FILESYSTEM_SUPPORT=ON ..
+            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv4_cmake_options.txt` -DBUILD_opencv_videoio=ON -DBUILD_opencv_world=OFF -DOPENCV_DISABLE_FILESYSTEM_SUPPORT=ON ..
         cmake --build . -j 2
         cmake --build . --target install
     - name: build-arm64-v8a
@@ -54,14 +54,12 @@ jobs:
         mkdir build-arm64-v8a && cd build-arm64-v8a
         cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_HOME/ndk-bundle/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI="arm64-v8a" -DANDROID_PLATFORM=android-21 -DANDROID_CPP_FEATURES="no-rtti no-exceptions" \
-            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv4_cmake_options.txt` -DBUILD_opencv_world=OFF -DOPENCV_DISABLE_FILESYSTEM_SUPPORT=ON ..
+            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv4_cmake_options.txt` -DBUILD_opencv_videoio=ON -DBUILD_opencv_world=OFF -DOPENCV_DISABLE_FILESYSTEM_SUPPORT=ON ..
         cmake --build . -j 2
         cmake --build . --target install
     - name: package
       run: |
         mkdir ${{ env.PACKAGENAME }}
-        cp -rf opencv-${{ env.OPENCV_VERSION }}/build-x86/install/* ${{ env.PACKAGENAME }}/
-        cp -rf opencv-${{ env.OPENCV_VERSION }}/build-x86_64/install/* ${{ env.PACKAGENAME }}/
         cp -rf opencv-${{ env.OPENCV_VERSION }}/build-armeabi-v7a/install/* ${{ env.PACKAGENAME }}/
         cp -rf opencv-${{ env.OPENCV_VERSION }}/build-arm64-v8a/install/* ${{ env.PACKAGENAME }}/
         rm -rf ${{ env.PACKAGENAME }}/sdk/etc
@@ -99,7 +97,7 @@ jobs:
         mkdir build-armeabi-v7a && cd build-armeabi-v7a
         cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_HOME/ndk-bundle/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI="armeabi-v7a" -DANDROID_ARM_NEON=ON -DANDROID_PLATFORM=android-21 -DANDROID_CPP_FEATURES="no-rtti no-exceptions" \
-            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv3_cmake_options.txt` -DBUILD_opencv_world=OFF ..
+            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv3_cmake_options.txt` -DBUILD_opencv_videoio=ON -DBUILD_opencv_world=OFF ..
         cmake --build . -j 2
         cmake --build . --target install
     - name: build-arm64-v8a
@@ -108,14 +106,12 @@ jobs:
         mkdir build-arm64-v8a && cd build-arm64-v8a
         cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_HOME/ndk-bundle/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI="arm64-v8a" -DANDROID_PLATFORM=android-24 -DANDROID_CPP_FEATURES="no-rtti no-exceptions" \
-            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv3_cmake_options.txt` -DBUILD_opencv_world=OFF ..
+            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv3_cmake_options.txt` -DBUILD_opencv_videoio=ON -DBUILD_opencv_world=OFF ..
         cmake --build . -j 2
         cmake --build . --target install
     - name: package
       run: |
         mkdir ${{ env.PACKAGENAME }}
-        cp -rf opencv-${{ env.OPENCV_VERSION }}/build-x86/install/* ${{ env.PACKAGENAME }}/
-        cp -rf opencv-${{ env.OPENCV_VERSION }}/build-x86_64/install/* ${{ env.PACKAGENAME }}/
         cp -rf opencv-${{ env.OPENCV_VERSION }}/build-armeabi-v7a/install/* ${{ env.PACKAGENAME }}/
         cp -rf opencv-${{ env.OPENCV_VERSION }}/build-arm64-v8a/install/* ${{ env.PACKAGENAME }}/
         rm -rf ${{ env.PACKAGENAME }}/apk
@@ -156,7 +152,7 @@ jobs:
         mkdir build-armeabi-v7a && cd build-armeabi-v7a
         cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_HOME/ndk-bundle/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI="armeabi-v7a" -DANDROID_ARM_NEON=ON -DANDROID_PLATFORM=android-24 -DANDROID_CPP_FEATURES="no-rtti no-exceptions" \
-            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv2_cmake_options.txt` -DBUILD_opencv_world=OFF ..
+            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv2_cmake_options.txt` -DBUILD_opencv_videoio=ON -DBUILD_opencv_world=OFF ..
         cmake --build . -j 2
         cmake --build . --target install
     - name: build-arm64-v8a
@@ -165,20 +161,16 @@ jobs:
         mkdir build-arm64-v8a && cd build-arm64-v8a
         cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_HOME/ndk-bundle/build/cmake/android.toolchain.cmake \
             -DANDROID_ABI="arm64-v8a" -DANDROID_PLATFORM=android-24 -DANDROID_CPP_FEATURES="no-rtti no-exceptions" \
-            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv2_cmake_options.txt` -DBUILD_opencv_world=OFF ..
+            -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=Release `cat ../../opencv2_cmake_options.txt` -DBUILD_opencv_videoio=ON -DBUILD_opencv_world=OFF ..
         cmake --build . -j 2
         cmake --build . --target install
     - name: package
       run: |
         mkdir ${{ env.PACKAGENAME }}
-        cp -rf opencv-${{ env.OPENCV_VERSION }}/build-x86/install/* ${{ env.PACKAGENAME }}/
-        cp -rf opencv-${{ env.OPENCV_VERSION }}/build-x86_64/install/* ${{ env.PACKAGENAME }}/
         cp -rf opencv-${{ env.OPENCV_VERSION }}/build-armeabi-v7a/install/* ${{ env.PACKAGENAME }}/
         cp -rf opencv-${{ env.OPENCV_VERSION }}/build-arm64-v8a/install/* ${{ env.PACKAGENAME }}/
         rm -f ${{ env.PACKAGENAME }}/sdk/native/libs/armeabi-v7a/libopencv_info.so
         rm -f ${{ env.PACKAGENAME }}/sdk/native/libs/arm64-v8a/libopencv_info.so
-        rm -f ${{ env.PACKAGENAME }}/sdk/native/libs/x86/libopencv_info.so
-        rm -f ${{ env.PACKAGENAME }}/sdk/native/libs/x86_64/libopencv_info.so
         rm -rf ${{ env.PACKAGENAME }}/sdk/etc
         rm -f ${{ env.PACKAGENAME }}/sdk/native/jni/*.mk
         rm -f ${{ env.PACKAGENAME }}/sdk/native/jni/android.toolchain.cmake
