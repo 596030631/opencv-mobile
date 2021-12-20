@@ -35,8 +35,8 @@ jobs:
         cd opencv-${{ env.OPENCV_VERSION }}
         truncate -s 0 cmake/OpenCVFindLibsGrfmt.cmake
         rm -rf modules/gapi
-        patch -p1 -i ../opencv-4.5.4-no-rtti.patch
-        patch -p1 -i ../opencv-4.5.4-no-zlib.patch
+        # patch -p1 -i ../opencv-4.5.4-no-rtti.patch
+        # patch -p1 -i ../opencv-4.5.4-no-zlib.patch
         rm -rf modules/highgui
         cp -r ../highgui modules/
     - name: build-armeabi-v7a
@@ -87,8 +87,8 @@ jobs:
         unzip -q opencv-${{ env.OPENCV_VERSION }}.zip
         cd opencv-${{ env.OPENCV_VERSION }}
         truncate -s 0 cmake/OpenCVFindLibsGrfmt.cmake
-        patch -p1 -i ../opencv-3.4.16-no-rtti.patch
-        patch -p1 -i ../opencv-3.4.16-no-zlib.patch
+        # patch -p1 -i ../opencv-3.4.16-no-rtti.patch
+        # patch -p1 -i ../opencv-3.4.16-no-zlib.patch
         rm -rf modules/highgui
         cp -r ../highgui modules/
     - name: build-armeabi-v7a
